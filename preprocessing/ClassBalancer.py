@@ -1,4 +1,5 @@
 from imblearn.over_sampling import SMOTE, RandomOverSampler
+from imblearn.under_sampling import RandomUnderSampler
 
 
 class ClassBalancer:
@@ -7,32 +8,32 @@ class ClassBalancer:
     including oversampling and undersampling techniques.
     """
 
-    def __init__(self, dataframe, target, technique, seed):
+    def __init__(self, dataframe, target, parameters):
         """
         Initialization of ClassBalancer class
 
         Args:
             dataframe (dataframe): Data
             target (string): target variable name.
-            technique (string): technique to be used in the balancing procedure.
-            seed (int): seed to be used when balancing classes.
+            parameters (dict): parameters dictionary containing all the needed information.
         """
         self.dataframe = dataframe
         self.target = target
-        self.technique = technique
-        self.seed = seed
+        self.parameters = parameters
 
-    def  balance_classes(self):
+    def balance_classes(self):
         """
         Depending on the balancing technique calls the implementation of it.
 
         Returns:
             Returns the balanced dataframe.
         """
-        if self.technique == 'smote':
-            return self.transform(SMOTE(random_state=self.seed))
-        elif self.technique == 'random_oversampling':
-            return self.transform(RandomOverSampler(random_state=self.seed))
+        if self.parameters['class_balancer'] == 'smote':
+            return self.transform(SMOTE(random_state=self.parameters['seed']))
+        elif self.parameters['class_balancer'] == 'random_oversampling':
+            return self.transform(RandomOverSampler(random_state=self.parameters['seed']))
+        elif self.parameters['class_balancer'] == 'random_undersampling':
+            return self.transform(RandomUnderSampler(random_state=self.parameters['seed']))
 
         else:
             return self.dataframe

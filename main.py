@@ -27,7 +27,7 @@ def exception_control(parameters):
                    'error_msg': 'The scaler is not available, the implemented scalers keys are: {}'},
         'encoder': {'valid_values': ['one_hot', 'target_encoding'],
                     'error_msg': 'The encoder is not available, the implemented encoders keys are: {}'},
-        'class_balancer': {'valid_values': ['smote', 'random_oversampling'],
+        'class_balancer': {'valid_values': ['smote', 'random_oversampling', 'random_undersampling'],
                            'error_msg': 'The balancer is not available, the implemented balancer keys are: {}'},
         'evaluation_technique': {'valid_values': ['train_test', 'bootstrap', '.632+'],
                                  'error_msg': 'The evaluation is not available, the implemented evaluation keys are: {}'},
@@ -41,7 +41,8 @@ def exception_control(parameters):
         'feature_selector': {'type': str, 'error_msg': 'Parameter "{}" has to be a string'},
         'parameters_grid': {'valid_types': [str, dict], 'error_msg': 'Parameter "{}" has to be a string'},
         'plot_mean_roc': {'type': bool, 'error_msg': 'Parameter "{}" has to be a boolean'},
-        'roc_color': {'type': str, 'error_msg': 'The given color is not correct'}
+        'roc_color': {'type': str, 'error_msg': 'The given color is not correct'},
+        'test_size': {'type': float, 'error_msg': 'Parameter "{}" has to be a float'}
     }
 
     for k, v in parameters.items():
