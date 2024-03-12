@@ -41,7 +41,7 @@ class TrainTest(EvaluateModel):
             X_train, X_test, y_train, y_test = train_test_split(
                 self.parameters['dataframe'].drop(self.parameters['target'], axis=1),
                 self.parameters['dataframe'][self.parameters['target']],
-                test_size=0.3, random_state=seed)
+                test_size=self.parameters['test_size'], random_state=seed)
 
             model, feature_importances = self.instantiate_model(X_train, y_train, self.parameters['model'], self.parameters['best_params'])
             y_pred = model.predict(X_test)
