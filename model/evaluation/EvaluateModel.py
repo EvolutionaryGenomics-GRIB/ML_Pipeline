@@ -144,8 +144,8 @@ class EvaluateModel:
         plt.legend(loc='lower right')
 
         # Save the figure in pdf & png
-        plt.savefig('roc.pdf')
-        plt.savefig('roc.png')
+        plt.savefig(self.parameters['output_path'] + 'roc.pdf')
+        plt.savefig(self.parameters['output_path'] + 'roc.png')
 
     def compute_metrics(self, y_true, y_pred, y_pred_proba):
         """

@@ -1,6 +1,7 @@
 from model.Train import Train
 from model.evaluation.EvaluationPipeline import EvaluationPipeline
 from model.OutputModule import Output
+from joblib import dump
 
 
 class ModelPipeline:
@@ -37,5 +38,7 @@ class ModelPipeline:
 
         # We generate a file containing all the details of this run
         output_generator = Output(self.parameters)
+
+        dump(model, self.parameters['output_path'] + 'model.joblib')
 
         return output_generator.generate_dataframe()

@@ -36,7 +36,7 @@ def exception_control(parameters):
         'enable_parameter_search': {'type': bool, 'error_msg': 'Parameter "{}" has to be a boolean'},
         'splitting_runs': {'type': int, 'error_msg': 'Parameter "{}" has to be an integer'},
         'bootstrap_runs': {'type': int, 'error_msg': 'Parameter "{}" has to be an integer'},
-        'output_file': {'type': str, 'error_msg': 'Parameter "{}" has to be a string'},
+        'output_path': {'type': str, 'error_msg': 'Parameter "{}" has to be a string'},
         'num_features': {'type': int, 'error_msg': 'Parameter "{}" has to be an integer'},
         'feature_selector': {'type': str, 'error_msg': 'Parameter "{}" has to be a string'},
         'parameters_grid': {'valid_types': [str, dict], 'error_msg': 'Parameter "{}" has to be a string'},
@@ -145,7 +145,7 @@ def main():
         aux = model_pipeline.run()
         output_dataframe = pd.concat([output_dataframe, aux], ignore_index=True)
 
-    output_dataframe.T.to_csv(parameters['output_file'])
+    output_dataframe.T.to_csv(parameters['output_path'] + 'output.csv')
 
 
 if __name__ == "__main__":
