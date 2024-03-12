@@ -3,8 +3,6 @@
   "scaler": "min_max",
   "features": [
     "TMB_zscore",
-    "APOBECenrichment.total",
-    "nonstop",
     "CCND1",
     "PD1.zscore",
     "PDL1.zscore",
@@ -17,22 +15,20 @@
     "T cells CD4 memory activated",
     "T cells CD8",
     "T cells regulatory (Tregs)",
-    "ECOG_under0",
-    "Liver.Metastasis",
     "APM_8.GSVA",
     "t.spec.lncRNA.GSVA"
   ],
   "feature_selector": "",
   "num_features": 5,
   "encoder": "one_hot",
-  "class_balancer": "",
+  "class_balancer": "smote",
   "evaluation_technique": "train_test",
   "model": "random_forest",
   "enable_parameter_search": false,
   "splitting_runs": 1000,
   "bootstrap_runs": 100,
   "plot_mean_roc": true,
-  "roc_color": "black",
+  "roc_color": "red",
   "parameters_grid": {
     "n_estimators": [
       100
@@ -47,7 +43,7 @@
       2
     ],
     "min_samples_leaf": [
-      12
+      18
     ],
     "max_features": [
       "sqrt"

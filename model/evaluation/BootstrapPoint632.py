@@ -6,11 +6,27 @@ from model.evaluation.bootstrap_point632 import bootstrap_point632_score
 
 
 class BootstrapPoint632(EvaluateModel):
+    """
+    Class including all methods for Botstrap .632+ method.
+    """
     def __init__(self, parameters):
+        """
+          Initialize a new instance of the class
+
+          Args:
+              parameters (dictionary): dictionary containing all the needed parameters.
+
+        """
         self.runs = parameters['bootstrap_runs']
         self.parameters = parameters
 
     def evaluate(self):
+        """
+        Performs bootstrap .632+ over all the existing ML metrics.
+
+        Returns:
+            The dictionary containing all the different metrics.
+        """
         # callable_metrics = {'auc': roc_auc_score, 'accuracy': accuracy_score, 'precision': precision_score,
         #                     'recall': recall_score, 'f1': f1_score}
         callable_metrics = {'auc': roc_auc_score}

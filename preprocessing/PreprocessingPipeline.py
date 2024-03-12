@@ -25,10 +25,6 @@ class PreprocessingPipeline:
         self.dataframe = dataframe
         self.parameters = parameters
 
-        # We want to have two separate dataframes according to its data type so we can perform different operations
-        # on them
-
-
     def split_by_data_type(self):
         """
         Splits the data in categorical and numerical and assigns it to its respective class parameters
@@ -49,12 +45,10 @@ class PreprocessingPipeline:
         # Keep wanted features only
         if 'features' in self.parameters and len(self.parameters['features']) >= 1:
             variables = self.parameters['features'] + [self.parameters['target']]
-
             try:
                 self.dataframe = self.dataframe[variables]
             except Exception as e:
                 raise Exception("Some variables are not in the dataframe: " + str(e))
-
 
         # Split in numerical and categorical
         self.split_by_data_type()
@@ -84,7 +78,6 @@ class PreprocessingPipeline:
         self.dataframe = self.dataframe.dropna()
 
         # Feature selection
-
         if 'feature_selector' in self.parameters and self.parameters['feature_selector'] \
                 and 'num_features' in self.parameters and self.parameters['num_features'] > 0:
             feature_selector = FeatureSelector(self.dataframe, self.parameters['target'],
@@ -97,7 +90,8 @@ class PreprocessingPipeline:
 
         if self.parameters['evaluation_technique'] == 'train_test':
             X_train, X_test, y_train, y_test = train_test_split(self.dataframe.drop(self.parameters['target'], axis=1),
-                                                                self.dataframe[self.parameters['target']], test_size=0.3,
+                                                                self.dataframe[self.parameters['target']],
+                                                                test_size=0.3,
                                                                 random_state=self.parameters['seed'])
         else:
             X_train = self.dataframe.drop(self.parameters['target'], axis=1)

@@ -83,19 +83,18 @@ class EvaluateModel:
 
     def plot_roc(self, metrics_df, averaged_auc, overoptimistic_auc=0, overoptimistic_curve=[]):
         """
-        Creates the roc curve plot
+        Plots and saves the roc curve plot.
 
         Args:
             metrics_df (dataframe): The dataframe containing all the metrics.
             averaged_auc (float): the mean Area Under the Curve of the different runs.
-            overoptimistic_auc (float): the
-            params (dictionary): dictionary containing the optimized hyperparameters of the model
+            overoptimistic_auc (float): the overoptimistic AUC.
+            overoptimistic_curve (list): roc curve for the overoptimistic run.
 
-        Returns:
-            The fitted model and a dictionary containing the feature importances.
         """
         plt.figure(figsize=(8, 8))
 
+        # Plots the overoptimistic curve if .632+ was selected as evaluation technique
         if overoptimistic_curve:
             plt.plot(overoptimistic_curve[0], overoptimistic_curve[1], color='navy', lw=2, linestyle='dotted',
                      label='Overoptimistic AUC: ' + str(round(overoptimistic_auc, 2)))
@@ -114,6 +113,7 @@ class EvaluateModel:
         interp_tpr_values = [interp1d(fpr, tpr, kind='linear', fill_value='extrapolate')(mean_fpr) for fpr, tpr in
                              zip(fpr_values, tpr_values)]
 
+        # Plots all the runs
         if not self.parameters['plot_mean_roc']:
             linestyle = '--'
             for index, row in metrics_df.iterrows():
@@ -121,6 +121,7 @@ class EvaluateModel:
                 fpr = row['fpr']
 
                 plt.plot(fpr, tpr, lw=1, color='grey')
+        # Only the mean ROC curve is plotted
         else:
             linestyle = 'solid'
 
@@ -142,19 +143,22 @@ class EvaluateModel:
         plt.title('Receiver Operating Characteristic (ROC) Curve')
         plt.legend(loc='lower right')
 
+        # Save the figure in pdf & png
         plt.savefig('roc.pdf')
+        plt.savefig('roc.png')
 
     def compute_metrics(self, y_true, y_pred, y_pred_proba):
         """
-        Once we get the predictions we compared against the truth in order to extract all the common metrics
-        used in Machine Learning: Accuracy, precision, recall, f1-score, AUC, and the confussion matrix.
+        Once we get the predictions we compared against the true labels in order to extract all the common metrics
+        used in Machine Learning: Accuracy, precision, recall, f1-score, AUC, and the confusion matrix.
 
         Args:
-            y_pred (array): binary predictions
-            y_pred_proba (array): probabilistic predictions
+            y_true (array): true labels.
+            y_pred (array): binary predictions.
+            y_pred_proba (array): probabilistic predictions.
 
         Returns:
-            The dictionary containing all the evaluation metrics
+            The dictionary containing all the evaluation metrics.
         """
         # Initialize the dictionary to store evaluation results
         evaluation_results = {}

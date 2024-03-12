@@ -6,6 +6,14 @@ import pandas as pd
 
 class TrainTest(EvaluateModel):
     def __init__(self, parameters, model):
+        """
+        Initializes the Train/Test evaluation technique.
+
+        Args:
+            parameters (dict): the parameters dictionary containing all the needed values.
+            model (sklearn model): the trained model.
+
+        """
         self.runs = parameters['splitting_runs']
         self.X = parameters['X_test']
         self.y = parameters['y_test']
@@ -13,6 +21,12 @@ class TrainTest(EvaluateModel):
         self.model = model
 
     def evaluate(self):
+        """
+        Performs evaluation following the train/test technique.
+
+        Returns:
+            The dictionary containing all the evaluation metrics.
+        """
         y_pred = self.model.predict(self.X)
         y_pred_proba = self.model.predict_proba(self.X)[:, 1]
 
