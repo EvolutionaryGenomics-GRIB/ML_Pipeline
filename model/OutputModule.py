@@ -20,10 +20,14 @@ class Output:
     def generate_dataframe(self):
         """
         Method used for generating the dataframe that will store the output of both pipelines.
+
+        Returns:
+            A pandas dataframe containing the output of a particular run of the pipeline.
         """
         columns = []
         values = []
 
+        # Removal of all the parameters that we do not want to output.
         del self.parameters['X_train']
         del self.parameters['X_test']
         del self.parameters['y_train']
@@ -31,21 +35,9 @@ class Output:
         del self.parameters['dataframe']
         del self.parameters['parameters_grid']
 
-        if self.parameters['evaluation_technique'] != 'bootstrap':
-            for key, value in self.parameters['evaluation_results'].items():
-                self.parameters['evaluation_results'][key] = round(value, 4)
-        else:
-            metrics = self.parameters['evaluation_results'][0]
-            c_stat = self.parameters['evaluation_results'][1]
-            for key, value in metrics.items():
-                metrics[key] = round(value, 4)
-
-            self.parameters['evaluation_results'] = metrics
-
-            for key, value in c_stat.items():
-                c_stat[key] = round(value, 4)
-
-            self.parameters['overfitting'] = c_stat
+        # Round metrics values to 4 decimals
+        for key, value in self.parameters['evaluation_results'].items():
+            self.parameters['evaluation_results'][key] = round(value, 4)
 
         for key, value in self.parameters.items():
             if isinstance(value, dict) and key is not 'feature_importances':

@@ -19,9 +19,7 @@ class GradientDescent(Model):
         instantiated inside this constructor.
 
         Args:
-            X (dataframe): Dataframe containing the training information for the model.
-            y (array): Array containing the training target variable.
-            seed (int): Seed to be used in the LogisticRegression
+            parameters (dict): contains all the needed information, from training data to hyperparameters grid.
 
         """
         self.parameters = parameters

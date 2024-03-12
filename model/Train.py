@@ -12,23 +12,19 @@ class Train:
 
     def __init__(self, parameters):
         """
-        Initialize a new instance of Train
+        Initialize a new instance of Train class.
 
         Args:
-            X_train (dataframe): training data.
-            y_train (array): target array corresponding to training data.
             parameters (dictionary): contains all the needed parameters.
         """
         self.parameters = parameters
 
     def train(self):
         """
-        Performs the training step which varies depending on the type of model that we will be using.
+        Performs the training step which varies depending on the type of model that is used.
 
         Returns:
             model (object): trained model.
-            feature_importances (dictionary): dictionary containing all the features used for training the model along
-                                              with its respective coefficients.
             best_params (dictionary): dictionary containing the best hyperparameters for this model.
 
         """

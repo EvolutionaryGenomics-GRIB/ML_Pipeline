@@ -13,11 +13,8 @@ class Model:
         Initialize a new instance of Model.
 
         Args:
-            X (dataframe): Training dataframe.
-            y (array): Target variable.
+            parameters (dict): contains all the needed information, from training data to hyperparameters grid.
             model (object): Instantiated Machine Learning model.
-            param_grid (dictionary): Hyperparameters for the model.
-
         """
         self.parameters = parameters
         self.X = self.parameters['X_train']
@@ -33,7 +30,7 @@ class Model:
         score do not improve the old one.
 
         Returns:
-            The trained grid search that contains the feature importances, best score, best hyperparameters,
+            The trained grid search that contains the feature importances, best score, the best hyperparameters,
             among other important parameters.
         """
         min_class_samples = np.min(np.bincount(self.y))
