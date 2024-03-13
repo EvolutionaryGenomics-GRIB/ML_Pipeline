@@ -28,7 +28,7 @@ class DataTransformer:
 
     def transform_data(self):
         """
-        This is the main function of the class that will deal with all the transformations.
+        This is the ML_pipeline_0.01 function of the class that will deal with all the transformations.
 
         Returns:
             Both the numerical and categorical dataframes but already transformed.

@@ -27,7 +27,7 @@ class DataCleaner:
 
     def clean_data(self):
         """
-        This is the main function of the class that will perform the data cleaning procedure.
+        This is the ML_pipeline_0.01 function of the class that will perform the data cleaning procedure.
 
         Returns:
             The cleaned dataframe.

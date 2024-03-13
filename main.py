@@ -108,6 +108,7 @@ def main():
         arg2 = sys.argv[2]
 
     # We need to convert our arg2 into a dictionary of parameters
+    print(arg2)
     try:
         with open(arg2, "r") as json_file:
             parameters = json.load(json_file)

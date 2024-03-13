@@ -27,9 +27,12 @@
   "encoder": "one_hot",
   "class_balancer": "random_undersampling",
   "evaluation_technique": "train_test",
-  "model": "random_forest",
+  "model": [
+    "random_forest",
+    "xgboost"
+  ],
   "enable_parameter_search": false,
-  "splitting_runs": 1000,
+  "splitting_runs": 5,
   "test_size": 0.3,
   "bootstrap_runs": 100,
   "plot_mean_roc": true,

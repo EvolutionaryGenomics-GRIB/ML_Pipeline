@@ -36,7 +36,7 @@ class Model:
         min_class_samples = np.min(np.bincount(self.y))
         n_splits = min(15, min_class_samples)
 
-        grid_search = GridSearchCV(self.model, self.param_grid, cv=n_splits, scoring='roc_auc', n_jobs=-1, verbose=1)
+        grid_search = GridSearchCV(self.model, self.param_grid, cv=n_splits, scoring='roc_auc', n_jobs=None, verbose=1)
         grid_search.fit(self.X, self.y)
 
         if not self.enable_grid_modification:

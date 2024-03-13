@@ -39,6 +39,6 @@ class ModelPipeline:
         # We generate a file containing all the details of this run
         output_generator = Output(self.parameters)
 
-        dump(model, self.parameters['output_path'] + 'model.joblib')
+        dump(model, self.parameters['output_path'] + self.parameters['model'] + 'model.joblib')
 
         return output_generator.generate_dataframe()
