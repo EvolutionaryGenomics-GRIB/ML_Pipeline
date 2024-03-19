@@ -2,6 +2,8 @@ from model.Train import Train
 from model.evaluation.EvaluationPipeline import EvaluationPipeline
 from model.OutputModule import Output
 from joblib import dump
+import os
+import json
 
 
 class ModelPipeline:
@@ -24,6 +26,14 @@ class ModelPipeline:
         Trains the model for finally testing and generate a file that will contain all the information related to
         the process.
         """
+
+        # We check if the provided parameters_grid exists and is not a dictionary, we only want to execute the code if
+        # it is a path, so we can select the correct parameters_grid
+        if self.parameters['parameters_grid'] and self.parameters['model'] in self.parameters['parameters_grid'].keys():
+            self.parameters['parameters_grid'] = self.parameters['parameters_grid'][self.parameters['model']]
+        else:
+            self.parameters['parameters_grid'] = ""
+
         # We instantiate the training pipeline and we train the model
         training_pipeline = Train(self.parameters)
         model, best_params = training_pipeline.train()

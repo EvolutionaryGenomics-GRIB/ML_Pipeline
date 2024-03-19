@@ -18,7 +18,7 @@ class RBF_SVM(Model):
             parameters (dict): contains all the needed information, from training data to hyperparameters grid.
         """
         self.parameters = parameters
-        if 'parameters_grid' not in self.parameters:
+        if 'parameters_grid' not in self.parameters or not self.parameters['parameters_grid']:
             self.parameters['parameters_grid'] = self.param_grid
 
         Model.__init__(self, parameters, SVC(kernel='rbf', probability=True, random_state=self.parameters['seed']))
