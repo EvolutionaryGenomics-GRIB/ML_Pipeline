@@ -13,7 +13,7 @@ class ElasticNet(Model):
 
         """
         self.parameters = parameters
-        if 'parameters_grid' not in self.parameters:
+        if 'parameters_grid' not in self.parameters or not self.parameters['parameters_grid']:
             self.parameters['parameters_grid'] = self.param_grid
 
         Model.__init__(self, parameters, ElasticNetModel(random_state=self.parameters['seed']))

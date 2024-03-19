@@ -1,5 +1,6 @@
 import copy
 import json
+import os
 import re
 import sys
 import time
@@ -93,6 +94,15 @@ def generate_combinations(json_obj, current_combination, combinations_list):
         generate_combinations(json_obj, current_combination, combinations_list)
 
 
+def get_parameters_grid(parameters):
+    try:
+        with open(parameters['parameters_grid'], "r") as json_file:
+            hyperparameters = json.load(json_file)
+            return hyperparameters
+    except ():
+        print("Could not convert the parameters grid file to a dictionary, assigning default parameters.")
+        return ""
+
 def main():
     # Check if command-line arguments were provided
     if len(sys.argv) < 2:
@@ -108,7 +118,6 @@ def main():
         arg2 = sys.argv[2]
 
     # We need to convert our arg2 into a dictionary of parameters
-    print(arg2)
     try:
         with open(arg2, "r") as json_file:
             parameters = json.load(json_file)
@@ -125,6 +134,12 @@ def main():
         dataframe = pd.read_csv(arg1)
     except (ValueError, SyntaxError):
         raise ValueError("Data has to be in a comma separated csv format")
+
+    if 'parameters_grid' in parameters and parameters['parameters_grid']:
+        if not isinstance(parameters['parameters_grid'], dict) and os.path.exists(parameters['parameters_grid']):
+            parameters['parameters_grid'] = get_parameters_grid(parameters)
+        elif isinstance(parameters['model'], list) and len(parameters['model']) > 1:
+            parameters['parameters_grid'] = ""
 
     combinations = []
     generate_combinations(parameters.copy(), {}, combinations)
