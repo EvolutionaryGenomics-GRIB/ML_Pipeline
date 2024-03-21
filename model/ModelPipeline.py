@@ -51,4 +51,7 @@ class ModelPipeline:
 
         dump(model, self.parameters['output_path'] + self.parameters['model'] + 'model.joblib')
 
+        # Generate output file
+        output_generator.generate_output_file()
+
         return output_generator.generate_dataframe()

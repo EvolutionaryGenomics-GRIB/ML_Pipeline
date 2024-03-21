@@ -94,6 +94,25 @@ def generate_combinations(json_obj, current_combination, combinations_list):
         generate_combinations(json_obj, current_combination, combinations_list)
 
 
+def create_output_folder(parameters):
+    """
+    Creates an output directory if the provided one is incorrect, in case the user makes multiple mistakes it
+    creates different directories for every run.
+
+    Args:
+        parameters (dict): dicitonary contained all the parameters.
+    """
+    if not os.path.exists(parameters['output_path']):
+        counter = 1
+        output_path = 'ML_Pipeline_Output'
+        while os.path.exists(output_path):
+            output_path = f"ML_Pipeline_Output_{counter}/"
+            counter += 1
+
+        os.mkdir(output_path)
+        parameters['output_path'] = output_path + '/'
+
+
 def get_parameters_grid(parameters):
     try:
         with open(parameters['parameters_grid'], "r") as json_file:
@@ -134,6 +153,9 @@ def main():
         dataframe = pd.read_csv(arg1)
     except (ValueError, SyntaxError):
         raise ValueError("Data has to be in a comma separated csv format")
+
+    # Check if output dir exists and create it if not
+    create_output_folder(parameters)
 
     if 'parameters_grid' in parameters and parameters['parameters_grid']:
         if not isinstance(parameters['parameters_grid'], dict) and os.path.exists(parameters['parameters_grid']):
