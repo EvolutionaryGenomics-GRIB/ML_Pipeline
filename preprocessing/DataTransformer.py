@@ -36,9 +36,13 @@ class DataTransformer:
 
         if 'scaler' in self.parameters and self.parameters['scaler']:
             self.numerical_dataframe = self.scale(self.parameters['scaler'])
+        else:
+            self.parameters['scaler'] = '-'
 
         if 'encoder' in self.parameters and self.parameters['encoder']:
             self.categorical_dataframe = self.encode()
+        else:
+            self.parameters['encoder'] = '-'
 
         return self.numerical_dataframe, self.categorical_dataframe
 

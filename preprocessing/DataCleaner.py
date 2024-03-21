@@ -34,6 +34,8 @@ class DataCleaner:
         """
         if 'imputer' in self.parameters and self.parameters['imputer']:
             self.dataframe = self.impute(self.parameters['imputer'])
+        else:
+            self.parameters['imputer'] = '-'
 
         return self.dataframe
 

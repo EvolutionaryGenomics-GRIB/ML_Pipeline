@@ -84,6 +84,9 @@ class PreprocessingPipeline:
                                                self.parameters['feature_selector'],
                                                self.parameters['num_features'])
             self.dataframe = feature_selector.select_features()
+        else:
+            self.parameters['feature_selector'] = '-'
+            self.parameters['num_features'] = '-'
 
         if 'seed' not in self.parameters or not self.parameters['seed']:
             self.parameters['seed'] = random.randint(1, 999999)
@@ -106,6 +109,8 @@ class PreprocessingPipeline:
         if 'class_balancer' in self.parameters and self.parameters['class_balancer']:
             class_balancer = ClassBalancer(X_train, y_train, self.parameters)
             X_train, y_train = class_balancer.balance_classes()
+        else:
+            self.parameters['class_balancer'] = '-'
 
         self.parameters['dataframe'] = self.dataframe
         self.parameters['X_train'] = X_train

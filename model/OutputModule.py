@@ -49,3 +49,20 @@ class Output:
                 values.append(value)
 
         return pd.DataFrame([values], columns=columns)
+
+    def generate_output_file(self):
+        with open(self.parameters['output_path'] + 'output.txt', 'a') as file:
+            file.write(f"Results for {self.parameters['model']}:\n\n")
+            file.write(f"Class balancer: {self.parameters['class_balancer']}, scaler: {self.parameters['scaler']}, encoder: {self.parameters['encoder']}, "
+                       f"imputer: {self.parameters['imputer']} \n\n")
+            file.write(f"Feature selector: {self.parameters['feature_selector']}, number of features to select: {self.parameters['num_features']} \n\n")
+            file.write(f"Target variable: {self.parameters['target']}\n\n")
+
+            feature_importances = ', '.join([f"('{key}', {value})" for key, value in self.parameters['feature_importances'].items()])
+
+            file.write(f"Feature importances: {feature_importances} \n\n")
+            file.write(f"Hyperparameters: {self.parameters['best_params']} \n\n")
+            scores_dictionary = self.parameters['evaluation_results']
+            file.write(f"Scores: Accuracy = {scores_dictionary['accuracy']}, Precision = {scores_dictionary['precision']}, "
+                       f"Recall = {scores_dictionary['recall']}, F1 = {scores_dictionary['f1']}, AUC = {scores_dictionary['auc']}\n\n")
+            file.write("-------------------------------------------\n\n")

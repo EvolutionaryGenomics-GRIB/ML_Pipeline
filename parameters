@@ -27,7 +27,10 @@
   "encoder": "one_hot",
   "class_balancer": "random_undersampling",
   "evaluation_technique": "train_test",
-  "model": "xgboost",
+  "model": [
+    "xgboost",
+    "random_forest"
+  ],
   "enable_parameter_search": false,
   "splitting_runs": 5,
   "test_size": 0.3,
@@ -43,5 +46,5 @@
       0.005
     ]
   },
-  "output_path": "/home/sergiov/PycharmProjects/ICB_Response_Model/scripts/"
+  "output_path": "/home/sergiov/PycharmProjects/ICB_Response_Model/scriptss/"
 }
