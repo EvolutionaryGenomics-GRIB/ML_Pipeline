@@ -25,26 +25,40 @@
   "feature_selector": "",
   "num_features": 5,
   "encoder": "one_hot",
-  "class_balancer": "random_undersampling",
+  "class_balancer": "",
   "evaluation_technique": "train_test",
-  "model": [
-    "xgboost",
-    "random_forest"
-  ],
+  "model": "random_forest",
   "enable_parameter_search": false,
-  "splitting_runs": 5,
+  "splitting_runs": 100,
   "test_size": 0.3,
-  "bootstrap_runs": 100,
+  "bootstrap_runs": 1000,
   "plot_mean_roc": true,
   "roc_color": "black",
+  "output_path": "/home/sergiov/PycharmProjects/ICB_Response_Model/scripts/",
   "parameters_grid": {
     "n_estimators": [
       100
     ],
-    "alpha": [
-      0.001,
-      0.005
+    "criterion": [
+      "gini"
+    ],
+    "max_depth": [
+      null
+    ],
+    "min_samples_split": [
+      2
+    ],
+    "min_samples_leaf": [
+      12
+    ],
+    "max_features": [
+      "sqrt"
+    ],
+    "bootstrap": [
+      true
+    ],
+    "oob_score": [
+      true
     ]
-  },
-  "output_path": "/home/sergiov/PycharmProjects/ICB_Response_Model/scriptss/"
+  }
 }
