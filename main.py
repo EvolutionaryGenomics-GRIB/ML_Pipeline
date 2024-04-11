@@ -103,14 +103,17 @@ def create_output_folder(parameters):
         parameters (dict): dicitonary contained all the parameters.
     """
     if not os.path.exists(parameters['output_path']):
-        counter = 1
         output_path = 'ML_Pipeline_Output'
-        while os.path.exists(output_path):
-            output_path = f"ML_Pipeline_Output_{counter}/"
-            counter += 1
+    else:
+        output_path = parameters['output_path'] + 'ML_Pipeline_Output'
 
-        os.mkdir(output_path)
-        parameters['output_path'] = output_path + '/'
+    counter = 1
+    while os.path.exists(output_path):
+        output_path = f"ML_Pipeline_Output_{counter}/"
+        counter += 1
+
+    os.mkdir(output_path)
+    parameters['output_path'] = output_path + '/'
 
 
 def get_parameters_grid(parameters):

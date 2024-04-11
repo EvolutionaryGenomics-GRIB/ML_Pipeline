@@ -7,7 +7,8 @@ import xgboost as xgb
 import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.svm import SVC
-import matplotlib.backends.backend_pdf
+from sklearn.calibration import calibration_curve
+from sklearn.metrics import brier_score_loss
 
 
 def get_feature_importances(model, model_type, feature_names):
@@ -47,10 +48,12 @@ def get_feature_importances(model, model_type, feature_names):
 
     return feature_importances
 
+
 class EvaluateModel:
     """
     Superclass for the different evaluation techniques implemented in the pipeline, contains all the common methods
     """
+
     def instantiate_model(self, X_train, y_train, model_type, params):
         """
         Fits the model to the data passed as parameters and retrieves the feature importances
@@ -191,5 +194,9 @@ class EvaluateModel:
 
         roc_auc = auc(fpr, tpr)
         evaluation_results['auc'] = roc_auc
+
+        # Calibration metric
+        brier_score = brier_score_loss(y_true, y_pred_proba)
+        evaluation_results['brier_score'] = brier_score
 
         return evaluation_results

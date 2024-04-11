@@ -52,7 +52,7 @@ class Output:
 
     def generate_output_file(self):
         with open(self.parameters['output_path'] + 'output.txt', 'a') as file:
-            file.write(f"Results for {self.parameters['model']}:\n\n")
+            file.write(f"Results for {self.parameters['model']}, N={self.parameters['sample_size']}:\n\n")
             file.write(f"Class balancer: {self.parameters['class_balancer']}, scaler: {self.parameters['scaler']}, encoder: {self.parameters['encoder']}, "
                        f"imputer: {self.parameters['imputer']} \n\n")
             file.write(f"Feature selector: {self.parameters['feature_selector']}, number of features to select: {self.parameters['num_features']} \n\n")
